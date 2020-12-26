@@ -26,15 +26,11 @@ def pwned_api_check(password):
 
 
 def main(args):
-    count_list = []
-    for password in args:
-        count_list.append(pwned_api_check(password))
-
-    for count, password in zip(count_list, args):
-        if not count:
-            print(f'Good news "{password}" wasn\'t found.')
-        else:
-            print(f'{password} has been used {count} times, you should change it')
+    pass_count = pwned_api_check(args)
+    if not pass_count:
+        print(f'Good news "{args}" wasn\'t found.')
+    else:
+        print(f'{args} has been used {pass_count} times, you should change it')
 
 
 if __name__ == '__main__':
@@ -46,4 +42,15 @@ if __name__ == '__main__':
         else:
             print(f'Good news "{check}" wasn\'t found.')
     else:
-        main(sys.argv[1:])
+        fileName = sys.argv[1]
+        if '.txt' in fileName:
+            with open(fileName) as file:
+                passwords = file.readlines()
+        else:
+            with open(fileName + '.txt') as file:
+                passwords = file.readlines()
+        for password in passwords:
+            if password[-1] == '\n':
+                main(password[:-1])
+            else:
+                main(password)
