@@ -1,3 +1,3 @@
-# PythonScripts
+# PythonProjects
 
-These are some of my python scripts that i worked on while learning and practicing.
+These are some of small projects that I created to practice and learn Python
